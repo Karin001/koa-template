@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home Page</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <input type="file" multiple="multiple" name="files" id="img0">
+    <button type="button" id="btn">upload</button>
+</body>
+<script>
+    const fileBox = document.querySelector('#img0')
+    const btn = document.querySelector('#btn')
+    let files;
+    let i = 0;
+    fileBox.addEventListener('change', function (event) {
+        files = event.target.files;
+        console.log(files)
+       
+    })
+    btn.addEventListener('click', function (event) {
+        if (!files || files.length === 0) {
+            return
+        }
+        const fd = new FormData()
+        for (const file of files) {
+            console.log(file)
+            fd.append('files',file,file.name)
+        }
+        fd.append('username','yukarin')
+        fetch('/api/upload',{
+            method:'post',
+            body:fd
+        }).then(res=>res.json())
+        .then(res=>{ 
+            console.log(res)
+        })
+    })
+</script>
+
+</html>
