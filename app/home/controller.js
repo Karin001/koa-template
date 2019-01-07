@@ -1,5 +1,5 @@
 function renderHomePage(ctx,next){
-    ctx.render('home')
+    ctx.render('index')
     console.log('here')
     next()
 }
