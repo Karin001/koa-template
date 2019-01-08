@@ -60,9 +60,12 @@
                 <label for="message">Message</label>
                 <textarea name="" id="message" cols="30" rows="10" required></textarea>
             </div>
-            <button id="submit"> Submit</button>
+            <button id="submitBtn"> Submit
+                <span id="loading" style="display:none" class="cssload-loader"><span class="cssload-loader-inner"></span></span>
+            </button>
+            
         </form>
-        
+        <h2 id="sendHint"></h2>
     </section>
 
 </body>
@@ -75,6 +78,9 @@
     var fcEmail = document.querySelector('#email')
     var fcMessage = document.querySelector('#message')
     var submit = document.querySelector('form')
+    var submitBtn = document.querySelector('#submitBtn')
+    var loading = document.querySelector('#loading')
+    var sendHInt = document.querySelector('#sendHint')
     const ar = [resetBtn, closeBtn]
     ar.forEach(element => {
         element.addEventListener('mouseenter', function (event) {
@@ -95,22 +101,29 @@
             ele.value = ''
         })
     })
-    submit.addEventListener('submit',function(event){
+    submit.addEventListener('submit', function (event) {
         event.preventDefault()
-       
+        submitBtn.disabled = "disabled";
+        loading.style.display = 'block'
         const data = {
-            name:fcName.value,
-            email:fcEmail.value,
-            message:fcMessage.value
+            name: fcName.value,
+            email: fcEmail.value,
+            message: fcMessage.value
         }
-        console.log('haha',data)
-        fetch('/sendMail',{
-            method:'post',
-            body:JSON.stringify(data)
-        }).then(res=>res.json())
-        .then(res=>{ 
-            console.log(res)
-        })
+        console.log('haha', data)
+        fetch('/sendMail', {
+            method: 'post',
+            body: JSON.stringify(data)
+        }).then(res => res.json())
+            .then(res => {
+                loading.style.display="none"
+                submit.style.display="none"
+                if(res && res.success && res.success==='ok'){
+                    sendHInt.innerHTML = "thanks for sending！"
+                } else{
+                    sendHInt.innerHTML = "something went wrong please try again"
+                }
+            })
     })
 </script>
 
