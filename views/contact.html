@@ -60,7 +60,7 @@
                 <label for="message">Message</label>
                 <textarea name="" id="message" cols="30" rows="10" required></textarea>
             </div>
-            <button id="submit" type="button"> Submit</button>
+            <button id="submit"> Submit</button>
         </form>
         
     </section>
@@ -74,7 +74,7 @@
     var fcName = document.querySelector('#name')
     var fcEmail = document.querySelector('#email')
     var fcMessage = document.querySelector('#message')
-    var submit = document.querySelector('#submit')
+    var submit = document.querySelector('form')
     const ar = [resetBtn, closeBtn]
     ar.forEach(element => {
         element.addEventListener('mouseenter', function (event) {
@@ -95,15 +95,18 @@
             ele.value = ''
         })
     })
-    submit.addEventListener('click',function(){
+    submit.addEventListener('submit',function(event){
+        event.preventDefault()
+       
         const data = {
             name:fcName.value,
             email:fcEmail.value,
             message:fcMessage.value
         }
+        console.log('haha',data)
         fetch('/sendMail',{
             method:'post',
-            body:data
+            body:JSON.stringify(data)
         }).then(res=>res.json())
         .then(res=>{ 
             console.log(res)
