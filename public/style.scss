@@ -2,6 +2,7 @@ html,body{
     margin:0;
     padding:0;
 }
+
 header{
     width: 100%;
     max-width: 1240px;
@@ -206,10 +207,12 @@ header{
                 padding:30px;
                 display: flex;
                 flex-direction: column;
+               justify-content: space-around;
                 align-items: center;
                 button{
                     background-color: #fff;
                     border:2px solid blueviolet;
+                    margin-bottom: 20px;
                     color:blueviolet;
                     font-size: 1.1rem;
                     border-radius: 20px;

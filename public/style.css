@@ -305,6 +305,8 @@ header button:hover {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -313,6 +315,7 @@ header button:hover {
 .recent .work-con .work .hold-info button {
   background-color: #fff;
   border: 2px solid blueviolet;
+  margin-bottom: 20px;
   color: blueviolet;
   font-size: 1.1rem;
   border-radius: 20px;
